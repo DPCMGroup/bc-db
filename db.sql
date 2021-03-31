@@ -1,4 +1,5 @@
 SET time_zone = "+00:00";
+SET FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS rooms;
@@ -6,6 +7,7 @@ DROP TABLE IF EXISTS workStations;
 DROP TABLE IF EXISTS bookings;
 DROP TABLE IF EXISTS attendances;
 DROP TABLE IF EXISTS sanitizations;
+DROP TABLE IF EXISTS reports;
 
 CREATE TABLE users
 (
@@ -31,7 +33,7 @@ CREATE TABLE rooms
 CREATE TABLE workStations
 (
     id    				INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    WorkStationName    	VARCHAR(20) NOT NULL,
+    workStationName    	VARCHAR(20) NOT NULL,
     xWorkStation   		SMALLINT UNSIGNED NOT NULL, -- x-coordinate
 	yWorkStation   		SMALLINT UNSIGNED NOT NULL, -- y-coordinate
 	idRoom    			SMALLINT UNSIGNED NOT NULL,
@@ -39,7 +41,7 @@ CREATE TABLE workStations
 	archived    		TINYINT(1) NOT NULL,
 	FOREIGN KEY (idRoom) REFERENCES rooms (id) ON DELETE CASCADE,
 	UNIQUE (xWorkStation, yWorkStation),
-	UNIQUE (WorkStationName),
+	UNIQUE (workStationName),
 	CHECK (state >=0 AND state <=6)
 ) WITH SYSTEM VERSIONING;
 
@@ -73,7 +75,7 @@ CREATE TABLE attendances
 	idUser    		INTEGER UNSIGNED NOT NULL,
 	idBooking    	INTEGER UNSIGNED NOT NULL,
 	startTime		DATETIME NOT NULL,
-	endTime			DATETIME NOT NULL,
+	endTime			DATETIME,
 	FOREIGN KEY (idWorkStation) REFERENCES workStations (id) ON DELETE CASCADE,
 	FOREIGN KEY (idUser) REFERENCES users (id) ON DELETE CASCADE,
 	FOREIGN KEY (idBooking) REFERENCES bookings (id) ON DELETE CASCADE,
@@ -91,26 +93,14 @@ CREATE TABLE sanitizations
 	FOREIGN KEY (idUser) 		REFERENCES users (id) ON DELETE CASCADE
 ) WITH SYSTEM VERSIONING;
 
+CREATE TABLE reports
+(
+	id    			INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	reportTime		DATETIME NOT NULL,
+	hash    		VARCHAR(64) NOT NULL,
+	UNIQUE (reportTime)
+) WITH SYSTEM VERSIONING;
 
-
-/*popolamento*/
-
-INSERT INTO users (username, password, type, archived) VALUES 
-('admin','admin',0,0),
-('dipendente','dipendente',1,0),
-('addetto','addetto',2,0);
-
-INSERT INTO rooms (roomName,xRoom,yRoom,archived) VALUES
-('lab1',10,10,0),
-('lab2',20,20,0),
-('lab3',15,15,0);
-
-INSERT INTO workStations(WorkStationName, xWorkStation, yWorkStation, idRoom, state, archived) VALUES 
-('lab1-1x1',1,1,1,0),
-('lab1-2x2',2,2,1,0),
-('lab1-3x3',3,3,1,0),
-('lab1-4x4',4,4,1,0),
-('lab1-5x5',5,5,1,0);
-
+SET FOREIGN_KEY_CHECKS = 1;
 
 
