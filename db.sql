@@ -71,13 +71,9 @@ CREATE TABLE bookings
 CREATE TABLE attendances
 (
     id    			INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    idWorkStation   INTEGER UNSIGNED NOT NULL,
-	idUser    		INTEGER UNSIGNED NOT NULL,
 	idBooking    	INTEGER UNSIGNED NOT NULL,
 	startTime		DATETIME NOT NULL,
 	endTime			DATETIME,
-	FOREIGN KEY (idWorkStation) REFERENCES workStations (id) ON DELETE CASCADE,
-	FOREIGN KEY (idUser) REFERENCES users (id) ON DELETE CASCADE,
 	FOREIGN KEY (idBooking) REFERENCES bookings (id) ON DELETE CASCADE,
 	UNIQUE (idBooking),
 	CHECK (endTime >= startTime)
