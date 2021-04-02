@@ -1,15 +1,54 @@
 /*PRENOTAZIONI*/
 
-/* elenco delle postazioni disponibili in un determinato periodo (INIZIO - FINE) né guaste né archiviate)*/
-SELECT W.id
-FROM workStations W
-WHERE W.archived = 0 AND 
+/* elenco delle postazioni (escluse le guaste e le archiviate) in una determinata stanza (STANZA)*/
+SELECT W.workStationName
+FROM workStations W, rooms R
+WHERE W.archived = 0 AND
+	W.idRoom = R.id AND
+	R.id = /*STANZA(ID)*/ AND
+	NOT (W.state=5 OR W.state=6) 
+;
+
+/* elenco delle postazioni libere (né prenotate né guaste né archiviate) in un determinato periodo (INIZIO - FINE) in una determinata stanza (STANZA)*/
+SELECT W.workStationName
+FROM workStations W, rooms R
+WHERE W.archived = 0 AND
+	W.idRoom = R.id AND
+	R.id = /*STANZA(ID)*/ AND
 	NOT (W.state=5 OR W.state=6) 
 	AND W.id NOT IN (
 		SELECT B.idWorkStation
 		FROM bookings B
 		WHERE NOT (B.endTime <= /*INIZIO('YYYY-MM-DD hh:mm:ss'*/ OR B.startTime >= /*FINE('YYYY-MM-DD hh:mm:ss'*/)
-);
+	)
+;
+
+/* elenco delle postazioni prenotate (né libere né guaste né archiviate) in un determinato periodo (INIZIO - FINE)
+ in una determinata stanza (STANZA) con prenotante, orario inizio e orario fine*/
+SELECT W.workStationName, U.username, B1.startTime, B1.endTime
+FROM workStations W, rooms R, users U, bookings B1
+WHERE W.archived = 0 AND
+	W.idRoom = R.id AND
+	R.id = /*STANZA(ID)*/ AND
+	B1.idUser = U.id AND
+    B1.idWorkStation = W.id AND
+	NOT (W.state=5 OR W.state=6) 
+	AND W.id IN (
+		SELECT B2.idWorkStation
+		FROM bookings B2
+		WHERE NOT (B2.endTime <= /*INIZIO('YYYY-MM-DD hh:mm:ss'*/ OR B2.startTime >= /*FINE('YYYY-MM-DD hh:mm:ss'*/)
+	)
+;
+
+/*elenco delle prenotazioni effettuate da un determinato utente(UTENTE) da oggi al futuro*/
+SELECT R.roomName, W.workStationName, B.startTime, B.endTime
+FROM workStations W, rooms R, users U, bookings B 
+WHERE B.idWorkStation = W.id AND
+B.idUser = U.id AND
+W.idRoom = R.id AND
+U.id = /*UTENTE(ID)*/
+;
+
 
 /*VERIFICARE VERSIONING*/
 
