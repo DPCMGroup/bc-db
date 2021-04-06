@@ -1,10 +1,10 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
-INSERT INTO users (username, password, type, archived) VALUES 
-('admin','admin',0,0),
-('dipendente1','dipendente',1,0),
-('addetto','addetto',2,0),
-('dipendente2','dipendente',1,0);
+INSERT INTO users (username, password, name, surname, mail, type, archived) VALUES 
+('mrossi-admin','admin','mario','rossi','mario.rossi@gmail.com',0,0),
+('averdi-dipendente','dipendente','alessio','verdi','alessio.verdi@yahoo.it',1,0),
+('gbianchi-addetto','addetto','gianni','bianchi','gianni.bianchi@pulizie.it',2,0),
+('mneri','dipendente','marika','neri','marika.neri@virgilio.it',1,0);
 
 INSERT INTO rooms (roomName,xRoom,yRoom,archived) VALUES
 ('lab1',10,10,0),
