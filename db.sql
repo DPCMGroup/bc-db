@@ -38,6 +38,7 @@ CREATE TABLE rooms
 CREATE TABLE workStations
 (
     id    				INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    tag    				VARCHAR(20) NOT NULL,
     workStationName    	VARCHAR(20) NOT NULL,
     xWorkStation   		SMALLINT UNSIGNED NOT NULL, -- x-coordinate
 	yWorkStation   		SMALLINT UNSIGNED NOT NULL, -- y-coordinate
@@ -45,8 +46,9 @@ CREATE TABLE workStations
 	state    			TINYINT UNSIGNED NOT NULL,
 	archived    		TINYINT(1) NOT NULL,
 	FOREIGN KEY (idRoom) REFERENCES rooms (id) ON DELETE CASCADE,
-	UNIQUE (xWorkStation, yWorkStation),
+	UNIQUE (xWorkStation, yWorkStation,idRoom),
 	UNIQUE (workStationName),
+	UNIQUE (tag),
 	CHECK (state >=0 AND state <=6)
 ) WITH SYSTEM VERSIONING;
 
