@@ -18,9 +18,9 @@ INSERT INTO workStations(tag, workStationName, xWorkStation, yWorkStation, idRoo
 ('00 1f 00 22 78 20 04','lab1-1x4',1,4,1,0,0),
 ('00 37 00 03 95 70 04','lab1-1x5',1,5,1,0,0),
 ('00 d2 00 05 1c 91 04','lab1-2x1',2,1,1,0,0),
-('81 6c f2 ba 7f 35 04','lab1-2x2',2,1,1,0,0),
-('80 6c f2 ba cc ef 04','lab1-2x3',2,2,1,0,0),
-('80 6c f2 ba d4 6d 04','lab1-2x4',2,3,1,0,0),
+('81 6c f2 ba 7f 35 04','lab1-2x2',2,2,1,0,0),
+('80 6c f2 ba cc ef 04','lab1-2x3',2,3,1,0,0),
+('80 6c f2 ba d4 6d 04','lab1-2x4',2,4,1,0,0)
 ;
 
 INSERT INTO bookings(idWorkStation, idUser, startTime, endTime) VALUES 
