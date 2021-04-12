@@ -43,25 +43,17 @@ CREATE TABLE workStations
     xWorkStation   		SMALLINT UNSIGNED NOT NULL, -- x-coordinate
 	yWorkStation   		SMALLINT UNSIGNED NOT NULL, -- y-coordinate
 	idRoom    			SMALLINT UNSIGNED NOT NULL,
-	state    			TINYINT UNSIGNED NOT NULL,
+	state    			TINYINT UNSIGNED NOT NULL, -- 0 available 1 taken 2 booked 3 broken 
+	sanitized    		TINYINT(1) NOT NULL, -- 0 not sanitized 1 sanitized
 	archived    		TINYINT(1) NOT NULL,
 	FOREIGN KEY (idRoom) REFERENCES rooms (id) ON DELETE CASCADE,
 	UNIQUE (xWorkStation, yWorkStation,idRoom),
 	UNIQUE (workStationName),
 	UNIQUE (tag),
-	CHECK (state >=0 AND state <=6)
+	CHECK (state >=0 AND state <=3)
 ) WITH SYSTEM VERSIONING;
 
-/* 
-TYPE
-0 available and sanitized
-1 available and not sanitized
-2 taken
-3 booked and sanitized
-4 booked and not sanitized
-5 broken and sanitized
-6 broken and not sanitized
-*/
+-- a taken workstation is always not sanitized
 
 CREATE TABLE failures
 (
