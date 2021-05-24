@@ -27,7 +27,7 @@ CREATE TABLE users
 
 CREATE TABLE rooms 
 (
-    id   	 	SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    id   	 	INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
     roomName    VARCHAR(20) NOT NULL,
     xRoom    	SMALLINT UNSIGNED NOT NULL, -- x: dimension1 grid
     yRoom    	SMALLINT UNSIGNED NOT NULL, -- y: dimension2 grid
@@ -42,7 +42,7 @@ CREATE TABLE workStations
     workStationName    	VARCHAR(20) NOT NULL,
     xWorkStation   		SMALLINT UNSIGNED NOT NULL, -- x-coordinate
 	yWorkStation   		SMALLINT UNSIGNED NOT NULL, -- y-coordinate
-	idRoom    			SMALLINT UNSIGNED NOT NULL,
+	idRoom    			INTEGER UNSIGNED NOT NULL,
 	state    			TINYINT UNSIGNED NOT NULL, -- 0 available 1 taken 2 booked 3 broken 
 	sanitized    		TINYINT(1) NOT NULL, -- 0 not sanitized 1 sanitized
 	archived    		TINYINT(1) NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE workStationsFailures
 CREATE TABLE roomsFailures
 (
     id    			INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    idRoom   INTEGER UNSIGNED NOT NULL,
+    idRoom   		INTEGER UNSIGNED NOT NULL,
 	startTime		DATETIME NOT NULL,
 	endTime			DATETIME,
 	FOREIGN KEY (idRoom) REFERENCES rooms (id) ON DELETE CASCADE
