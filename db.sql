@@ -4,8 +4,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS rooms;
 DROP TABLE IF EXISTS workStations;
-DROP TABLE IF EXISTS failures;
-
+DROP TABLE IF EXISTS workStationsFailures;
+DROP TABLE IF EXISTS roomsFailures;
 DROP TABLE IF EXISTS bookings;
 DROP TABLE IF EXISTS attendances;
 DROP TABLE IF EXISTS sanitizations;
@@ -55,13 +55,22 @@ CREATE TABLE workStations
 
 -- a taken workstation is always not sanitized
 
-CREATE TABLE failures
+CREATE TABLE workStationsFailures
 (
     id    			INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
     idWorkStation   INTEGER UNSIGNED NOT NULL,
 	startTime		DATETIME NOT NULL,
 	endTime			DATETIME,
 	FOREIGN KEY (idWorkStation) REFERENCES workStations (id) ON DELETE CASCADE
+) WITH SYSTEM VERSIONING;
+
+CREATE TABLE roomsFailures
+(
+    id    			INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    idRoom   INTEGER UNSIGNED NOT NULL,
+	startTime		DATETIME NOT NULL,
+	endTime			DATETIME,
+	FOREIGN KEY (idRoom) REFERENCES rooms (id) ON DELETE CASCADE
 ) WITH SYSTEM VERSIONING;
 
 CREATE TABLE bookings
