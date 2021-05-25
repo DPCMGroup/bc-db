@@ -7,10 +7,10 @@ INSERT INTO users (username, password, name, surname, mail, type, archived) VALU
 ('mneri','000','marika','neri','marika.neri@virgilio.it',1,0),
 ('mviola','000','matteo','viola','matteo.viola@virgilio.it',1,0);
 
-INSERT INTO rooms (roomName,xRoom,yRoom,archived) VALUES
-('lab1',10,10,0),
-('lab2',20,20,0),
-('lab3',15,15,0);
+INSERT INTO rooms (roomName,xRoom,yRoom,archived,unavailable) VALUES
+('lab1',10,10,0,0),
+('lab2',20,20,0,0),
+('lab3',15,15,0,0);
 
 INSERT INTO workStations(tag, workStationName, xWorkStation, yWorkStation, idRoom, state, sanitized, archived) VALUES
 ('00 c0 00 01 8d 91 04','lab1-1x1',1,1,1,0,0,0),

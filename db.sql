@@ -32,6 +32,7 @@ CREATE TABLE rooms
     xRoom    	SMALLINT UNSIGNED NOT NULL, -- x: dimension1 grid
     yRoom    	SMALLINT UNSIGNED NOT NULL, -- y: dimension2 grid
     archived    TINYINT(1) NOT NULL,
+	unavailable TINYINT(1) NOT NULL, -- 0 available 1 broken 
     UNIQUE (roomName)
 ) WITH SYSTEM VERSIONING;
 
