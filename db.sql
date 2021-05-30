@@ -62,6 +62,7 @@ CREATE TABLE workStationsFailures
     idWorkStation   INTEGER UNSIGNED NOT NULL,
 	startTime		DATETIME NOT NULL,
 	endTime			DATETIME,
+	archived    TINYINT(1) NOT NULL,
 	FOREIGN KEY (idWorkStation) REFERENCES workStations (id) ON DELETE CASCADE
 ) WITH SYSTEM VERSIONING;
 
@@ -71,6 +72,7 @@ CREATE TABLE roomsFailures
     idRoom   		INTEGER UNSIGNED NOT NULL,
 	startTime		DATETIME NOT NULL,
 	endTime			DATETIME,
+	archived    TINYINT(1) NOT NULL,
 	FOREIGN KEY (idRoom) REFERENCES rooms (id) ON DELETE CASCADE
 ) WITH SYSTEM VERSIONING;
 
@@ -81,6 +83,7 @@ CREATE TABLE bookings
 	idUser    		INTEGER UNSIGNED NOT NULL,
 	startTime		DATETIME NOT NULL,
 	endTime			DATETIME NOT NULL,
+	archived    TINYINT(1) NOT NULL,
 	FOREIGN KEY (idWorkStation) REFERENCES workStations (id) ON DELETE CASCADE,
 	FOREIGN KEY (idUser) REFERENCES users (id) ON DELETE CASCADE,
 	CHECK (endTime >= startTime)
