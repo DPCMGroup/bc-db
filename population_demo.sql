@@ -60,7 +60,7 @@ INSERT INTO workStations(tag, workStationName, xWorkStation, yWorkStation, idRoo
 ('00 c0 00 01 8d 91 w6','D-A4',1,4,5,0,0,0),
 ('00 c0 00 01 8d 91 w7','D-A5',1,5,5,0,1,0),
 ('00 c0 00 01 8d 91 w8','D-A6',1,6,5,0,0,0),
-('00 c0 00 01 8d 91 w9','D-A7',1,7,5,0,1,0),
+('00 c0 00 01 8d 91 w9','D-A7',1,7,5,0,1,0);
 
 INSERT INTO bookings(idWorkStation, idUser, startTime, endTime, archived) VALUES 
 (1,2,'2021-09-01 10:00:00','2021-09-01 13:00:00',0),
