@@ -63,6 +63,7 @@ INSERT INTO workStations(tag, workStationName, xWorkStation, yWorkStation, idRoo
 ('00 c0 00 01 8d 91 w9','D-A7',1,7,5,0,1,0);
 
 INSERT INTO bookings(idWorkStation, idUser, startTime, endTime, archived) VALUES 
+(1,2,'2021-06-01 10:30:00','2021-06-01 19:00:00',0),
 (1,2,'2021-09-01 10:00:00','2021-09-01 13:00:00',0),
 (1,2,'2021-09-02 10:00:00','2021-09-02 13:00:00',0),
 (1,2,'2021-09-03 10:00:00','2021-09-03 13:00:00',0),
@@ -88,7 +89,7 @@ INSERT INTO bookings(idWorkStation, idUser, startTime, endTime, archived) VALUES
 
 /* mettere la data di oggi */
 INSERT INTO attendances(id, idBooking, startTime, endTime) VALUES
-(1, 23,'2021-06-01 10:30:00','2021-06-01 19:00:00');
+(1, 1,'2021-06-01 10:30:00','2021-06-01 19:00:00');
 
 UPDATE workStations SET state = 1 where id = 27;
 
