@@ -4,8 +4,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS rooms;
 DROP TABLE IF EXISTS workStations;
-DROP TABLE IF EXISTS failures;
-
+DROP TABLE IF EXISTS workStationsFailures;
+DROP TABLE IF EXISTS roomsFailures;
 DROP TABLE IF EXISTS bookings;
 DROP TABLE IF EXISTS attendances;
 DROP TABLE IF EXISTS sanitizations;
@@ -27,11 +27,12 @@ CREATE TABLE users
 
 CREATE TABLE rooms 
 (
-    id   	 	SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    id   	 	INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
     roomName    VARCHAR(20) NOT NULL,
     xRoom    	SMALLINT UNSIGNED NOT NULL, -- x: dimension1 grid
     yRoom    	SMALLINT UNSIGNED NOT NULL, -- y: dimension2 grid
     archived    TINYINT(1) NOT NULL,
+	unavailable TINYINT(1) NOT NULL, -- 0 available 1 broken 
     UNIQUE (roomName)
 ) WITH SYSTEM VERSIONING;
 
@@ -42,7 +43,7 @@ CREATE TABLE workStations
     workStationName    	VARCHAR(20) NOT NULL,
     xWorkStation   		SMALLINT UNSIGNED NOT NULL, -- x-coordinate
 	yWorkStation   		SMALLINT UNSIGNED NOT NULL, -- y-coordinate
-	idRoom    			SMALLINT UNSIGNED NOT NULL,
+	idRoom    			INTEGER UNSIGNED NOT NULL,
 	state    			TINYINT UNSIGNED NOT NULL, -- 0 available 1 taken 2 booked 3 broken 
 	sanitized    		TINYINT(1) NOT NULL, -- 0 not sanitized 1 sanitized
 	archived    		TINYINT(1) NOT NULL,
@@ -55,13 +56,24 @@ CREATE TABLE workStations
 
 -- a taken workstation is always not sanitized
 
-CREATE TABLE failures
+CREATE TABLE workStationsFailures
 (
     id    			INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
     idWorkStation   INTEGER UNSIGNED NOT NULL,
 	startTime		DATETIME NOT NULL,
 	endTime			DATETIME,
+	archived    TINYINT(1) NOT NULL,
 	FOREIGN KEY (idWorkStation) REFERENCES workStations (id) ON DELETE CASCADE
+) WITH SYSTEM VERSIONING;
+
+CREATE TABLE roomsFailures
+(
+    id    			INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    idRoom   		INTEGER UNSIGNED NOT NULL,
+	startTime		DATETIME NOT NULL,
+	endTime			DATETIME,
+	archived    TINYINT(1) NOT NULL,
+	FOREIGN KEY (idRoom) REFERENCES rooms (id) ON DELETE CASCADE
 ) WITH SYSTEM VERSIONING;
 
 CREATE TABLE bookings
@@ -71,6 +83,7 @@ CREATE TABLE bookings
 	idUser    		INTEGER UNSIGNED NOT NULL,
 	startTime		DATETIME NOT NULL,
 	endTime			DATETIME NOT NULL,
+	archived    TINYINT(1) NOT NULL,
 	FOREIGN KEY (idWorkStation) REFERENCES workStations (id) ON DELETE CASCADE,
 	FOREIGN KEY (idUser) REFERENCES users (id) ON DELETE CASCADE,
 	CHECK (endTime >= startTime)
@@ -101,7 +114,8 @@ CREATE TABLE reports
 (
 	id    			INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	reportTime		DATETIME NOT NULL,
-	hash    		VARCHAR(64) NOT NULL,
+	blockchainHash  VARCHAR(64) NOT NULL,
+	fileHash    	VARCHAR(64) NOT NULL,
 	UNIQUE (reportTime)
 ) WITH SYSTEM VERSIONING;
 
