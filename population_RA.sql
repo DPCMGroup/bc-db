@@ -63,7 +63,14 @@ INSERT INTO workStations(id, tag, workStationName, xWorkStation, yWorkStation, i
 (31,'00 c0 00 01 8d 91 w6','D-A4',1,4,5,0,0,0),
 (32,'00 c0 00 01 8d 91 w7','D-A5',1,5,5,0,1,0),
 (33,'00 c0 00 01 8d 91 w8','D-A6',1,6,5,0,0,0),
-(34,'00 c0 00 01 8d 91 w9','D-A7',1,7,5,0,1,0);
+(34,'00 c0 00 01 8d 91 w9','D-A7',1,7,5,0,1,0),
+
+
+/*Laboratorio*/
+
+(35,'80 6c f2 ba 52 ea 04','L-B6',2,6,1,0,0,0),
+(36,'80 6c f2 ba 9f 32 04','L-B7',2,7,1,0,0,0),
+(37,'81 6c f2 ba 2b 07 04','L-B8',2,8,1,0,0,0);
 
 INSERT INTO bookings(id, idWorkStation, idUser, startTime, endTime, archived) VALUES 
 (1,1,2,'2021-06-01 10:30:00','2021-06-01 19:00:00',0),
