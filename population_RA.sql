@@ -57,14 +57,13 @@ INSERT INTO workStations(id, tag, workStationName, xWorkStation, yWorkStation, i
 (27,'00 c0 00 01 8d 91 h7','C-A5',1,5,4,3,0,0),
 
 /*Aula D*/
-(28,'00 c0 00 01 8d 91 w3','D-A1',1,1,5,0,0,0),
-(29,'00 c0 00 01 8d 91 w4','D-A2',1,2,5,0,0,0),
-(30,'00 c0 00 01 8d 91 w5','D-A3',1,3,5,0,0,0),
-(31,'00 c0 00 01 8d 91 w6','D-A4',1,4,5,0,0,0),
-(32,'00 c0 00 01 8d 91 w7','D-A5',1,5,5,0,1,0),
-(33,'00 c0 00 01 8d 91 w8','D-A6',1,6,5,0,0,0),
-(34,'00 c0 00 01 8d 91 w9','D-A7',1,7,5,0,1,0),
-
+(28,'00 c0 00 01 8d 91 w3','D-A1',1,1,5,0,0,0), /*libera non igienizzata*/
+(29,'00 c0 00 01 8d 91 w4','D-A2',1,2,5,0,1,0), /*libera igienizzata*/
+(30,'00 c0 00 01 8d 91 w5','D-A3',1,3,5,0,0,0), /*prenotata non igienizzata*/
+(31,'00 c0 00 01 8d 91 w6','D-A4',1,4,5,0,1,0), /*prenotata igienizzata*/
+(32,'00 c0 00 01 8d 91 w7','D-A5',1,5,5,0,0,0), /*occupata non igienizzata*/
+(33,'00 c0 00 01 8d 91 w8','D-A6',1,6,5,0,1,0), /*guasta non igienizzata*/
+(34,'00 c0 00 01 8d 91 w9','D-A7',1,7,5,0,0,0), /*guasta igienizzata*/
 
 /*Laboratorio*/
 
@@ -93,13 +92,15 @@ INSERT INTO bookings(id, idWorkStation, idUser, startTime, endTime, archived) VA
 (16,3,5,'2021-09-05 10:00:00','2021-09-05 13:00:00',0);
 
 INSERT INTO workStationsFailures (id, idWorkStation, startTime, endTime, archived) VALUES
-(1,30,'2021-06-01 10:00:00','2029-09-01 13:00:00',0),
-(2,31,'2021-06-01 10:00:00','2029-09-01 13:00:00',0),
+(1,33,'2021-06-01 10:00:00','2029-09-01 13:00:00',0),
+(2,34,'2021-06-01 10:00:00','2029-09-01 13:00:00',0),
 (3,11,'2021-06-01 10:00:00','2029-09-01 13:00:00',0);
 
 INSERT INTO sanitizations(idWorkStation,idUser,sanitizationTime) VALUES
-(32,2,'2021-03-03 16:59:00'),
-(34,3,'2021-03-03 17:52:00');
+(29,2,'2021-03-03 16:59:00'),
+(31,3,'2021-03-03 17:52:00'),
+(33,2,'2021-04-03 16:59:00')
+;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -107,23 +108,16 @@ SET FOREIGN_KEY_CHECKS = 1;
 SET FOREIGN_KEY_CHECKS = 0;
 
 INSERT INTO bookings(id, idWorkStation, idUser, startTime, endTime, archived) VALUES 
-(17,28,6,'2021-?data-oggi? 08:00:00','2021-?data-oggi? 23:00:00',0),
-(18,29,7,'2021-?data-oggi? 08:00:00','2021-?data-oggi? 23:00:00',0),
-(19,30,8,'2021-?data-oggi? 08:00:00','2021-?data-oggi? 23:00:00',0),
+(17,30,6,'2021-?data-oggi? 07:00:00','2021-?data-oggi? 23:00:00',0),
+(18,31,7,'2021-?data-oggi? 07:00:00','2021-?data-oggi? 23:00:00',0),
+(19,32,8,'2021-?data-oggi? 07:00:00','2021-?data-oggi? 23:00:00',0),
 
 (20,8,2,'2021-?data-oggi? 20:00:00','2021-?data-oggi? 23:00:00',0),
-(21,9,4,'2021-?data-oggi? 08:00:00','2021-?data-oggi? 23:00:00',0),
-(22,10,2,'2021-?data-oggi? 08:00:00','2021-?data-oggi? 23:00:00',0);
+(21,9,4,'2021-?data-oggi? 07:00:00','2021-?data-oggi? 23:00:00',0),
+(22,10,2,'2021-?data-oggi? 07:00:00','2021-?data-oggi? 23:00:00',0);
 
 INSERT INTO attendances(id, idBooking, startTime, endTime) VALUES
-(1, 17,'2021-?data-oggi? 08:00:00','2021-?data-oggi? 23:00:00'),
-(2, 18,'2021-?data-oggi? 08:00:00','2021-?data-oggi? 23:00:00'),
-(3, 22,'2021-?data-oggi? 08:00:00','2021-?data-oggi? 23:00:00');
-
-UPDATE workStations SET state = 2 where id = 28;
-UPDATE workStations SET state = 2 where id = 29;
-UPDATE workStations SET state = 1 where id = 30;
-UPDATE workStations SET state = 2 where id = 9;
-UPDATE workStations SET state = 1 where id = 10;
+(1, 19,'2021-?data-oggi? 07:30:00','2021-?data-oggi? 23:00:00'),
+(2, 22,'2021-?data-oggi? 07:30:00','2021-?data-oggi? 23:00:00');
 
 SET FOREIGN_KEY_CHECKS = 1;
