@@ -123,10 +123,17 @@ INSERT INTO attendances(id, idBooking, startTime, endTime) VALUES
 SET FOREIGN_KEY_CHECKS = 1;
 
 
-/*Occupazioni e sanificazioni giorno precedente e corrispondente report.*/
-/*Quando si decommenta ricordarsi di sostituire "?data-ieri?" con la data di ieri, in modo da avere un report delle occupazioni e delle igienizzazioni di ieri*/
+/* Occupazioni e sanificazioni del giorno precedente e corrispondente report.
+Utilizzo di questa sezione:
+1. sostituire ?data-ieri? con la data di ieri
+2. eseguire lo script
+3. scaricare dalla webapp un report completo di ieri
+4. salvare su blockchain il report ottenuto tramite la classe BlockchainClient contenuta nella repo bc19-api. Si otterranno i valori dell'indirizzo della transazione e dell'hash del report.
+5. nel database bc19-RA eseguire il comando sql seguente:
+		UPDATE reports SET blockchainHash='indirizzo_transazione', fileHash='hash_report' WHERE id='1030';
+   dove indirizzo_transazione e hash_report dovranno assumere i valori ottenuti al punto 4.
+*/
 /*
-
 
 SET FOREIGN_KEY_CHECKS = 0;
 
