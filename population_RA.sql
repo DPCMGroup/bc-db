@@ -122,24 +122,28 @@ INSERT INTO attendances(id, idBooking, startTime, endTime) VALUES
 
 SET FOREIGN_KEY_CHECKS = 1;
 
-/* occupazioni e sanificazioni giorno precedente e corrispondente report.  DECOMMENTARE SOLO IN DATA 2021-06-11.
+
+/*Occupazioni e sanificazioni giorno precedente e corrispondente report.*/
+/*Quando si decommenta ricordarsi di sostituire "?data-ieri?" con la data di ieri, in modo da avere un report delle occupazioni e delle igienizzazioni di ieri*/
+/*
+
 
 SET FOREIGN_KEY_CHECKS = 0;
 
 INSERT INTO bookings(id, idWorkStation, idUser, startTime, endTime, archived) VALUES 
-(23,28,7,'2021-06-10 10:00:00','2021-06-10 12:00:00',0),
-(24,29,8,'2021-06-10 11:00:00','2021-06-10 15:30:00',0);
+(23,28,7,'2021-?data-ieri? 10:00:00','2021-?data-ieri? 12:00:00',0),
+(24,29,8,'2021-?data-ieri? 11:00:00','2021-?data-ieri? 15:30:00',0);
 
 INSERT INTO attendances(id, idBooking, startTime, endTime) VALUES
-(3,23,'2021-06-10 10:30:00','2021-06-10 12:00:00'),
-(4,24,'2021-06-10 11:15:00','2021-06-10 15:30:00');
+(3,23,'2021-?data-ieri? 10:30:00','2021-?data-ieri? 12:00:00'),
+(4,24,'2021-?data-ieri? 11:15:00','2021-?data-ieri? 15:30:00');
 
 INSERT INTO sanitizations(idWorkStation,idUser,sanitizationTime) VALUES
-(28,7,'2021-06-10 12:05:00'),
-(29,8,'2021-06-10 15:40:00');
+(28,7,'2021-?data-ieri? 12:05:00'),
+(29,8,'2021-?data-ieri? 15:40:00');
 
 INSERT INTO reports(id,reportTime,blockchainHash, fileHash) VALUES
-(1030,'2021-06-10 23:58:00','0x411a602164673efcc0cf05f465309c9d4bbc23915306f86c5595642f5d30911c','0xd3866a1db3e5631ac26f5c81bf888e330a30846143d8e548d814a2ab1d77d3e1');
+(1030,'2021-?data-ieri? 23:58:00','0x411a602164673efcc0cf05f465309c9d4bbc23915306f86c5595642f5d30911c','0xd3866a1db3e5631ac26f5c81bf888e330a30846143d8e548d814a2ab1d77d3e1');
 
 SET FOREIGN_KEY_CHECKS = 1;
 
