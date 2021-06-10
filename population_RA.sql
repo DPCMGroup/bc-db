@@ -129,8 +129,8 @@ Utilizzo di questa sezione:
 2. eseguire lo script
 3. scaricare dalla webapp un report completo di ieri
 4. salvare su blockchain il report ottenuto tramite la classe BlockchainClient contenuta nella repo bc19-api. Si otterranno i valori dell'indirizzo della transazione e dell'hash del report.
-5. nel database bc19-RA eseguire il comando sql seguente:
-		UPDATE reports SET blockchainHash='indirizzo_transazione', fileHash='hash_report' WHERE id='1030';
+5. da riga di comando eseguire:
+		mysql -h dpcm2077.duckdns.org --port=2078 -u dpcm2077 -p --database bc19-RA -e "UPDATE reports SET blockchainHash='indirizzo_transazione', fileHash='hash_report' WHERE id='1030';"
    dove indirizzo_transazione e hash_report dovranno assumere i valori ottenuti al punto 4.
 */
 /*
