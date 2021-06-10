@@ -31,7 +31,7 @@ INSERT INTO workStations(id, tag, workStationName, xWorkStation, yWorkStation, i
 (8,'80 6c f2 ba 59 39 04','L-B2',2,2,1,0,0,0),  /*libera con prenotazione di averdi tardi*/
 (9,'80 6c f2 ba cc ef 04','L-B3',2,3,1,0,0,0),  /*prenotata da mneri*/
 (10,'80 6c f2 ba d4 6d 04','L-B4',2,4,1,0,0,0), /*occupata da averdi*/
-(11,'80 6c f2 ba 38 c7 04','L-B5',2,5,1,0,0,0), /*guasta*/
+(11,'80 6c f2 ba 38 c7 04','L-B5',2,5,1,0,1,0), /*guasta*/
 
 (12,'80 57 1f 82 15 40 04','L-C1',3,1,1,0,0,0),
 
